@@ -1,0 +1,40 @@
+image: "docker:latest"
+
+stages:
+  - build
+  - release
+
+services:
+- docker:dind
+
+variables:
+  DOCKER_DRIVER: overlay
+
+before_script:
+  - "pwd"
+  - "docker info"
+  - "docker login -u gitlab-ci-token -p $CI_JOB_TOKEN $CI_REGISTRY"
+
+after_script:
+  - "docker images"
+  - "docker logout $CI_REGISTRY"
+
+build:
+  stage: build
+  tags:
+    - docker
+  script:
+    - version=$(cat version)
+    - echo $version
+    - docker build --pull -t "$CI_REGISTRY_IMAGE:$version" .
+    - docker push "$CI_REGISTRY_IMAGE:$version"
+
+release-latest:
+  stage: release
+  tags:
+    - docker
+  script:
+    - docker build --pull -t "$CI_REGISTRY_IMAGE" .
+    - docker push "$CI_REGISTRY_IMAGE"
+  only:
+    - master
