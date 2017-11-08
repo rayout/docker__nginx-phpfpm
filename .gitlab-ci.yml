@@ -26,7 +26,8 @@ build:
   script:
     - version=$(cat version)
     - echo $version
-    - docker build --pull -t "$CI_REGISTRY_IMAGE:$version" .
+    - docker pull $CI_REGISTRY_IMAGE:$version
+    - docker build --pull -t $CI_REGISTRY_IMAGE:$version .
     - docker push "$CI_REGISTRY_IMAGE:$version"
 
 release-latest:
@@ -34,6 +35,7 @@ release-latest:
   tags:
     - docker
   script:
+    - docker pull $CI_REGISTRY_IMAGE:$version
     - docker build --pull -t "$CI_REGISTRY_IMAGE" .
     - docker push "$CI_REGISTRY_IMAGE"
   only:
