@@ -34,6 +34,7 @@ release-latest:
   tags:
     - docker
   script:
+    - version=$(cat version)
     - docker pull $CI_REGISTRY_IMAGE:$version
     - docker tag $CI_REGISTRY_IMAGE:$version $CI_REGISTRY_IMAGE:latest
     - docker push "$CI_REGISTRY_IMAGE:latest"
