@@ -130,7 +130,7 @@ RUN apk add  --no-cache \
 
 # Install other packages
 RUN apk add --no-cache \
-    supervisor curl less nano dcron msmtp git bash
+    supervisor curl less nano dcron msmtp git bash dnsmasq
 
 # Configure supervisord
 COPY config/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
