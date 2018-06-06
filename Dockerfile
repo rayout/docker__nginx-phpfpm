@@ -151,7 +151,7 @@ COPY config/nginx/helpers.sh /tmp/helpers.sh
 RUN chmod +x /tmp/setenv.sh
 
 # Cron tasks
-RUN mkdir -p /var/log/cron && mkdir -m 0644 -p /var/spool/cron/crontabs
+RUN mkdir -p /var/log/cron && mkdir -m 0644 -p /var/spool/cron/crontabs && mkdir -m 0644 -p /etc/cron.d
 COPY config/setup-cron-tasks.sh /root/setup-cron-tasks.sh
 RUN chmod +x /root/setup-cron-tasks.sh
 
