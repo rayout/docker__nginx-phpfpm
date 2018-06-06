@@ -11,7 +11,7 @@
 #
 if [ "$CRONTAB_LARAVEL_SCHEDULER_ENABLED" = "true" ]
 then
-   cat /var/spool/cron/crontabs | { cat; echo "* * * * * www-data php /var/www/artisan schedule:run >> /dev/null 2>&1"; } >> /etc/cron.d/crontab
+   cat /var/spool/cron/crontabs | { cat; echo "* * * * * php /var/www/artisan schedule:run >> /dev/null 2>&1"; } >> /etc/crontabs/www-data
 fi
 
 #
@@ -20,5 +20,5 @@ fi
 #
 if [ -n "$CRONTAB_JOBS" ]
 then
-   cat /var/spool/cron/crontabs | { cat; echo -e "$CRONTAB_JOBS" | sed 's/^ *//;s/ *$//'; } >> /etc/cron.d/crontab
+   cat /var/spool/cron/crontabs | { cat; echo -e "$CRONTAB_JOBS" | sed 's/^ *//;s/ *$//'; } >> /etc/crontabs/www-data
 fi
