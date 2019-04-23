@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 
 cd "$(dirname "$0")"
-source ./setenv.inc.sh
+source ./set-nginx-env.inc.sh
 
 config=/etc/nginx/sites-available/site.conf
 config_template=/etc/nginx/sites-available/site.conf.template
