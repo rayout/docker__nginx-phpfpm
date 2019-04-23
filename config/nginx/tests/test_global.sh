@@ -3,7 +3,7 @@
     config_template=site.conf
     config=$(mktemp /tmp/test_XXXXXXXXX)
     if [ -f $config ] ; then rm $config; fi
-    source ./setenv.inc.sh
+    source ./set-nginx-env.inc.sh
     source ./helpers.sh
 
     ENV_NGINX_PUBLIC_PATH="somewhere/config" ENV_NGINX_HOST=www.kodeks.ru,site.kodeks.net,api.cntd.ru main
@@ -17,7 +17,7 @@
     config_template=site.conf
     config=$(mktemp /tmp/test_XXXXXXXXX)
     if [ -f $config ] ; then rm $config; fi
-    source ./setenv.inc.sh
+    source ./set-nginx-env.inc.sh
     source ./helpers.sh
 
     ENV_NGINX_PUBLIC_PATH="somewhere/config" ENV_NGINX_HOST=www.kodeks.ru,site.kodeks.net,api.cntd.ru main
@@ -34,7 +34,7 @@
     config_template=site.conf
     config=$(mktemp /tmp/test_XXXXXXXXX)
     if [ -f $config ] ; then rm $config; fi
-    source ./setenv.inc.sh
+    source ./set-nginx-env.inc.sh
     source ./helpers.sh
 
     PUBLIC_PATH="somewhere/config" HOST=www.kodeks.ru,site.kodeks.net,api.cntd.ru main

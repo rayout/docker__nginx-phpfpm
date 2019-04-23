@@ -144,23 +144,20 @@ COPY config/php-fpm/php.ini /etc/php7/conf.d/php.ini
 COPY config/nginx/nginx.conf /etc/nginx/nginx.conf
 COPY config/nginx/site.conf /site.conf
 
-# nginx setenv.sh install
+# nginx set-nginx-env.sh install
 RUN echo "upstream php-upstream {server 0.0.0.0:9000;}" > /etc/nginx/conf.d/default.conf
-COPY config/nginx/setenv.sh /tmp/setenv.sh
-COPY config/nginx/setenv.inc.sh /tmp/setenv.inc.sh
-COPY config/nginx/helpers.sh /tmp/helpers.sh
-RUN chmod +x /tmp/setenv.sh
+COPY config/nginx/*.sh /tmp/
 
 # Cron tasks
 RUN mkdir -p /var/log/cron && mkdir -m 0644 -p /var/spool/cron/crontabs && mkdir -m 0644 -p /etc/cron.d
 COPY config/setup-cron-tasks.sh /root/setup-cron-tasks.sh
-RUN chmod +x /root/setup-cron-tasks.sh
 
 # Entrypoint script
-COPY config/entrypoint.sh /root/entrypoint.sh
-COPY config/start.sh /root/start.sh
+COPY config/*.sh /root/
 RUN chmod +x /root/entrypoint.sh & \
-	chmod +x /root/start.sh
+	chmod +x /root/setenv.sh & \
+	chmod +x /root/setup-cron-tasks.sh & \
+	chmod +x /tmp/set-nginx-env.sh
 
 # ensure www-data user exists
 RUN set -x ; \
@@ -169,4 +166,4 @@ RUN set -x ; \
 
 EXPOSE 80 443
 
-CMD ["/root/entrypoint.sh", ".env", "/root/start.sh"]
+CMD ["/root/entrypoint.sh"]
