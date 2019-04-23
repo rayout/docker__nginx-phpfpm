@@ -158,7 +158,9 @@ RUN chmod +x /root/setup-cron-tasks.sh
 
 # Entrypoint script
 COPY config/entrypoint.sh /root/entrypoint.sh
-RUN chmod +x /root/entrypoint.sh
+COPY config/start.sh /root/start.sh
+RUN chmod +x /root/entrypoint.sh & \
+	chmod +x /root/start.sh
 
 # ensure www-data user exists
 RUN set -x ; \
@@ -167,4 +169,4 @@ RUN set -x ; \
 
 EXPOSE 80 443
 
-CMD ["bash", "-c", "/root/entrypoint.sh"]
+CMD ["/root/entrypoint.sh", ".env", "/root/start.sh"]
