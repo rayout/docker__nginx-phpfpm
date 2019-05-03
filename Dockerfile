@@ -1,11 +1,11 @@
-FROM alpine:3.6
+FROM alpine:3.9
 LABEL Maintainer="Shapovalov Alex <alex_sh@kodeks.ru>" \
-      Description="Lightweight container with Nginx 1.12 & PHP-FPM 7.1 based on Alpine Linux."
+      Description="Lightweight container with Nginx 1.15.12 & PHP-FPM 7.2 based on Alpine Linux."
 
 RUN apk update
 
 ############ NGINX ##############
-ENV NGINX_VERSION 1.13.6
+ENV NGINX_VERSION 1.15.12
 
 RUN GPG_KEYS=B0F4253373F8F6F510D42178520A9993A1C052F8 \
 	&& CONFIG="\
