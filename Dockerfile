@@ -154,10 +154,11 @@ COPY config/setup-cron-tasks.sh /root/setup-cron-tasks.sh
 
 # Entrypoint script
 COPY config/*.sh /root/
-RUN chmod +x /root/entrypoint.sh & \
-	chmod +x /root/setenv.sh & \
-	chmod +x /root/setup-cron-tasks.sh & \
-	chmod +x /tmp/set-nginx-env.sh
+
+RUN chmod +x /root/entrypoint.sh
+RUN chmod +x /root/setenv.sh
+RUN chmod +x /root/setup-cron-tasks.sh
+RUN chmod +x /tmp/set-nginx-env.sh
 
 # ensure www-data user exists
 RUN set -x ; \
